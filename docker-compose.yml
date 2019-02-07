@@ -1,0 +1,8 @@
+version: '3'
+services:
+  grpc-server:
+    build: .
+    command: bundle exec rake grpc_server
+  grpc-client:
+    build: .
+    command: bundle exec rake grpc_client
