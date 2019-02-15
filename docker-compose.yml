@@ -1,8 +1,16 @@
 version: '3'
 services:
   grpc-server:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: bundle exec rake grpc_server
+    volumes:
+      - .:/app
   grpc-client:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     command: bundle exec rake grpc_client
+    volumes:
+      - .:/app

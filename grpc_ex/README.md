@@ -29,4 +29,4 @@ $ grpc_tools_ruby_protoc -I ./grpc_ex --ruby_out=grpc_ex --grpc_out=grpc_ex grpc
 
 `--ruby_out` generates Ruby code in DST_DIR
 
-3. Server handler must be inhereted from `Coolio::Service` and implement described interface
+3. Server handler must be inhereted from `Coolio::Service` and implement described in `.proto` interface

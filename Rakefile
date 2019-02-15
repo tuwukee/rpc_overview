@@ -7,7 +7,7 @@ require "grpc_ex/server/instance"
 desc "Start gRPC server"
 task :grpc_server do
   puts "START GRPC SERVER"
-  GrpcEx::Server::Instance.new.run
+  GrpcEx::Server::Instance.run
 end
 
 desc "Start gRPC client"
