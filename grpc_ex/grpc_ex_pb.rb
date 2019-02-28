@@ -4,49 +4,22 @@
 require "google/protobuf"
 
 Google::Protobuf::DescriptorPool.generated_pool.build do
+  add_message "HelloRequest" do
+    optional :content, :string, 1
+  end
+  add_message "HelloResponse" do
+    optional :content, :string, 1
+  end
   add_message "Message" do
-    optional :ID, :string, 1
-    optional :Timestamp, :int64, 2
-    optional :Content, :bytes, 3
-  end
-  add_message "PublishRequest" do
-    repeated :Channels, :string, 1
-    optional :Message, :message, 2, "Message"
-  end
-  add_message "PublishResponse" do
-    map :IDs, :string, :string, 1
+    optional :timestamp, :int64, 1
+    optional :content, :string, 2
   end
   add_message "ConsumeRequest" do
-    optional :ClientID, :string, 1
-    repeated :Channels, :string, 2
-    optional :Group, :string, 3
-  end
-  add_message "AckRequest" do
-    optional :ID, :string, 1
-  end
-  add_message "AckResponse" do
-  end
-  add_message "PingRequest" do
-    optional :Timestamp, :int64, 1
-  end
-  add_message "PingResponse" do
-  end
-  add_message "UnsubscribeRequest" do
-    optional :ClientID, :string, 2
-    repeated :Topics, :string, 3
-    optional :Group, :string, 4
-  end
-  add_message "UnsubscribeResponse" do
+    optional :client, :string, 1
   end
 end
 
+HelloRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("HelloRequest").msgclass
+HelloResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("HelloResponse").msgclass
 Message = Google::Protobuf::DescriptorPool.generated_pool.lookup("Message").msgclass
-PublishRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("PublishRequest").msgclass
-PublishResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("PublishResponse").msgclass
 ConsumeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("ConsumeRequest").msgclass
-AckRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("AckRequest").msgclass
-AckResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("AckResponse").msgclass
-PingRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("PingRequest").msgclass
-PingResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("PingResponse").msgclass
-UnsubscribeRequest = Google::Protobuf::DescriptorPool.generated_pool.lookup("UnsubscribeRequest").msgclass
-UnsubscribeResponse = Google::Protobuf::DescriptorPool.generated_pool.lookup("UnsubscribeResponse").msgclass

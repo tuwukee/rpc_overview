@@ -8,19 +8,14 @@ require "grpc_ex/grpc_ex_services_pb"
 module GrpcEx
   module Server
     class Handler < GrpcEx::Service
-      def publish
+      def hello(request, _unused)
+        puts("Received: #{request.inspect}")
+        HelloResponse.new(content: "hello #{request.content}")
       end
 
-      def ping
-      end
-
-      def ack
-      end
-
-      def consume
-      end
-
-      def unsubscribe
+      def consume(request, _unused)
+        puts("Received: #{request.inspect}")
+        [Message.new(timestamp: Time.now.to_i, content: "I don't know how to consume")]
       end
     end
   end

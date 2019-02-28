@@ -1,53 +1,24 @@
 syntax = "proto3";
 
+message HelloRequest {
+    string content = 1;
+}
+
+message HelloResponse {
+    string content = 1;
+}
+
 message Message {
-    string ID = 1;
-    int64 Timestamp = 2;
-    bytes Content = 3;
-}
-
-message PublishRequest {
-    repeated string Channels = 1;
-    Message Message = 2;
-}
-
-message PublishResponse {
-    map<string, string> IDs = 1;
+    int64 timestamp = 1;
+    string content = 2;
 }
 
 message ConsumeRequest {
-    string ClientID = 1;
-    repeated string Channels  = 2;
-    string Group = 3;
-}
-
-message AckRequest {
-    string ID = 1;
-}
-
-message AckResponse {
-}
-
-message PingRequest {
-    int64 Timestamp = 1;
-}
-
-message PingResponse {
-}
-
-message UnsubscribeRequest {
-    string ClientID = 2;
-    repeated string Topics = 3;
-    string Group = 4;
-}
-
-message UnsubscribeResponse {
+    string client = 1;
 }
 
 service GrpcEx {
-    rpc Publish(PublishRequest) returns (PublishResponse);
+    rpc Hello(HelloRequest) returns (HelloResponse);
     rpc Consume(ConsumeRequest) returns (stream Message);
-    rpc Ack(AckRequest) returns (AckResponse);
-    rpc Ping(PingRequest) returns (PingResponse);
-    rpc Unsubscribe(UnsubscribeRequest) returns (UnsubscribeResponse);
 }
+

@@ -7,5 +7,6 @@ gem "rake"
 
 group :development do
   gem "grpc-tools", require: false
+  gem "pry-byebug"
 end
 
