@@ -4,6 +4,8 @@ source "https://rubygems.org"
 
 gem "grpc"
 gem "rake"
+gem "twirp"
+gem "webrick"
 
 group :development do
   gem "grpc-tools", require: false

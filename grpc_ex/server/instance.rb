@@ -9,15 +9,26 @@ module GrpcEx
       attr_reader :server
 
       DEFAULT_HOST = "127.0.0.1:2001"
+      STOP_SIGNALS = %w[INT TERM].freeze
 
-      def self.run(host = DEFAULT_HOST)
-        puts("Start gRPC server")
+      def initialize(host = DEFAULT_HOST)
         @server = GRPC::RpcServer.new
         @server.add_http2_port(host, :this_port_is_insecure)
         @server.handle(GrpcEx::Server::Handler)
-        @server.run_till_terminated
+      end
+
+      def run
+        STOP_SIGNALS.each do |sig|
+          Signal.trap(sig) do
+            puts("gRPC terminate: #{sig}")
+            exit
+          end
+        end
+
+        server.run_till_terminated
+
       rescue => e
-        puts("Server error: #{e}")
+        puts("Error: #{e.message}")
       end
     end
   end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "grpc_ex/grpc_ex_services_pb"
+require "securerandom"
 
 module GrpcEx
   module Client
@@ -12,8 +13,8 @@ module GrpcEx
         @client_id = "gRPC-client-#{SecureRandom.hex}"
       end
 
-      def hello(str)
-        hello_request = HelloRequest.new(content: str)
+      def hello(content)
+        hello_request = HelloRequest.new(content: content)
         stub.hello(hello_request)
       end
 
