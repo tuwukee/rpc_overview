@@ -18,3 +18,5 @@ brew install thrift
 ```
 $ thrift -r --gen rb thrift_ex.thrift
 ```
+
+4. `Client` is reserved for a Thrift internal class name, use namespaces to avoid conflicts

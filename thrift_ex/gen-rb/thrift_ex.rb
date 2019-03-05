@@ -7,133 +7,135 @@
 require "thrift"
 require "thrift_ex/gen-rb/thrift_ex_types"
 
-module ThriftEx
-  class Client
-    include ::Thrift::Client
+module Ex
+  module ThriftEx
+    class Client
+      include ::Thrift::Client
 
-    def hello(req)
-      send_hello(req)
-      return recv_hello()
-    end
-
-    def send_hello(req)
-      send_message('hello', Hello_args, :req => req)
-    end
-
-    def recv_hello()
-      result = receive_message(Hello_result)
-      return result.success unless result.success.nil?
-      raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'hello failed: unknown result')
-    end
-
-    def consume(req)
-      send_consume(req)
-      return recv_consume()
-    end
-
-    def send_consume(req)
-      send_message('consume', Consume_args, :req => req)
-    end
-
-    def recv_consume()
-      result = receive_message(Consume_result)
-      return result.success unless result.success.nil?
-      raise result.e unless result.e.nil?
-      raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'consume failed: unknown result')
-    end
-
-  end
-
-  class Processor
-    include ::Thrift::Processor
-
-    def process_hello(seqid, iprot, oprot)
-      args = read_args(iprot, Hello_args)
-      result = Hello_result.new()
-      result.success = @handler.hello(args.req)
-      write_result(result, oprot, 'hello', seqid)
-    end
-
-    def process_consume(seqid, iprot, oprot)
-      args = read_args(iprot, Consume_args)
-      result = Consume_result.new()
-      begin
-        result.success = @handler.consume(args.req)
-      rescue ::Exp => e
-        result.e = e
+      def hello(req)
+        send_hello(req)
+        return recv_hello()
       end
-      write_result(result, oprot, 'consume', seqid)
+
+      def send_hello(req)
+        send_message('hello', Hello_args, :req => req)
+      end
+
+      def recv_hello()
+        result = receive_message(Hello_result)
+        return result.success unless result.success.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'hello failed: unknown result')
+      end
+
+      def consume(req)
+        send_consume(req)
+        return recv_consume()
+      end
+
+      def send_consume(req)
+        send_message('consume', Consume_args, :req => req)
+      end
+
+      def recv_consume()
+        result = receive_message(Consume_result)
+        return result.success unless result.success.nil?
+        raise result.e unless result.e.nil?
+        raise ::Thrift::ApplicationException.new(::Thrift::ApplicationException::MISSING_RESULT, 'consume failed: unknown result')
+      end
+
     end
 
-  end
+    class Processor
+      include ::Thrift::Processor
 
-  # HELPER FUNCTIONS AND STRUCTURES
+      def process_hello(seqid, iprot, oprot)
+        args = read_args(iprot, Hello_args)
+        result = Hello_result.new()
+        result.success = @handler.hello(args.req)
+        write_result(result, oprot, 'hello', seqid)
+      end
 
-  class Hello_args
-    include ::Thrift::Struct, ::Thrift::Struct_Union
-    REQ = 1
+      def process_consume(seqid, iprot, oprot)
+        args = read_args(iprot, Consume_args)
+        result = Consume_result.new()
+        begin
+          result.success = @handler.consume(args.req)
+        rescue ::Ex::Exp => e
+          result.e = e
+        end
+        write_result(result, oprot, 'consume', seqid)
+      end
 
-    FIELDS = {
-      REQ => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::HelloRequest}
-    }
-
-    def struct_fields; FIELDS; end
-
-    def validate
     end
 
-    ::Thrift::Struct.generate_accessors self
-  end
+    # HELPER FUNCTIONS AND STRUCTURES
 
-  class Hello_result
-    include ::Thrift::Struct, ::Thrift::Struct_Union
-    SUCCESS = 0
+    class Hello_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ = 1
 
-    FIELDS = {
-      SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::HelloResponse}
-    }
+      FIELDS = {
+        REQ => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Ex::HelloRequest}
+      }
 
-    def struct_fields; FIELDS; end
+      def struct_fields; FIELDS; end
 
-    def validate
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
     end
 
-    ::Thrift::Struct.generate_accessors self
-  end
+    class Hello_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS = 0
 
-  class Consume_args
-    include ::Thrift::Struct, ::Thrift::Struct_Union
-    REQ = 1
+      FIELDS = {
+        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Ex::HelloResponse}
+      }
 
-    FIELDS = {
-      REQ => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::ConsumeRequest}
-    }
+      def struct_fields; FIELDS; end
 
-    def struct_fields; FIELDS; end
+      def validate
+      end
 
-    def validate
+      ::Thrift::Struct.generate_accessors self
     end
 
-    ::Thrift::Struct.generate_accessors self
-  end
+    class Consume_args
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      REQ = 1
 
-  class Consume_result
-    include ::Thrift::Struct, ::Thrift::Struct_Union
-    SUCCESS = 0
-    E = 1
+      FIELDS = {
+        REQ => {:type => ::Thrift::Types::STRUCT, :name => 'req', :class => ::Ex::ConsumeRequest}
+      }
 
-    FIELDS = {
-      SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Message},
-      E => {:type => ::Thrift::Types::STRUCT, :name => 'e', :class => ::Exp}
-    }
+      def struct_fields; FIELDS; end
 
-    def struct_fields; FIELDS; end
+      def validate
+      end
 
-    def validate
+      ::Thrift::Struct.generate_accessors self
     end
 
-    ::Thrift::Struct.generate_accessors self
+    class Consume_result
+      include ::Thrift::Struct, ::Thrift::Struct_Union
+      SUCCESS = 0
+      E = 1
+
+      FIELDS = {
+        SUCCESS => {:type => ::Thrift::Types::STRUCT, :name => 'success', :class => ::Ex::Message},
+        E => {:type => ::Thrift::Types::STRUCT, :name => 'e', :class => ::Ex::Exp}
+      }
+
+      def struct_fields; FIELDS; end
+
+      def validate
+      end
+
+      ::Thrift::Struct.generate_accessors self
+    end
+
   end
 
 end
-

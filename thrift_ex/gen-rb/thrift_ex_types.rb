@@ -4,86 +4,88 @@
 # DO NOT EDIT UNLESS YOU ARE SURE THAT YOU KNOW WHAT YOU ARE DOING
 #
 
-require "thrift"
+require 'thrift'
 
-class HelloRequest
-  include ::Thrift::Struct, ::Thrift::Struct_Union
-  CONTENT = 1
+module Ex
+  class HelloRequest
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    CONTENT = 1
 
-  FIELDS = {
-    CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
-  }
+    FIELDS = {
+      CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
+    }
 
-  def struct_fields; FIELDS; end
+    def struct_fields; FIELDS; end
 
-  def validate
+    def validate
+    end
+
+    ::Thrift::Struct.generate_accessors self
   end
 
-  ::Thrift::Struct.generate_accessors self
-end
+  class HelloResponse
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    CONTENT = 1
 
-class HelloResponse
-  include ::Thrift::Struct, ::Thrift::Struct_Union
-  CONTENT = 1
+    FIELDS = {
+      CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
+    }
 
-  FIELDS = {
-    CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
-  }
+    def struct_fields; FIELDS; end
 
-  def struct_fields; FIELDS; end
+    def validate
+    end
 
-  def validate
+    ::Thrift::Struct.generate_accessors self
   end
 
-  ::Thrift::Struct.generate_accessors self
-end
+  class Message
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    TIMESTAMP = 1
+    CONTENT = 2
 
-class Message
-  include ::Thrift::Struct, ::Thrift::Struct_Union
-  TIMESTAMPS = 1
-  CONTENT = 2
+    FIELDS = {
+      TIMESTAMP => {:type => ::Thrift::Types::I64, :name => 'timestamp'},
+      CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
+    }
 
-  FIELDS = {
-    TIMESTAMPS => {:type => ::Thrift::Types::I64, :name => 'timestamps'},
-    CONTENT => {:type => ::Thrift::Types::STRING, :name => 'content'}
-  }
+    def struct_fields; FIELDS; end
 
-  def struct_fields; FIELDS; end
+    def validate
+    end
 
-  def validate
+    ::Thrift::Struct.generate_accessors self
   end
 
-  ::Thrift::Struct.generate_accessors self
-end
+  class ConsumeRequest
+    include ::Thrift::Struct, ::Thrift::Struct_Union
+    CLIENT = 1
 
-class ConsumeRequest
-  include ::Thrift::Struct, ::Thrift::Struct_Union
-  CLIENT = 1
+    FIELDS = {
+      CLIENT => {:type => ::Thrift::Types::STRING, :name => 'client'}
+    }
 
-  FIELDS = {
-    CLIENT => {:type => ::Thrift::Types::STRING, :name => 'client'}
-  }
+    def struct_fields; FIELDS; end
 
-  def struct_fields; FIELDS; end
+    def validate
+    end
 
-  def validate
+    ::Thrift::Struct.generate_accessors self
   end
 
-  ::Thrift::Struct.generate_accessors self
-end
+  class Exp < ::Thrift::Exception
+    include ::Thrift::Struct, ::Thrift::Struct_Union
 
-class Exp < ::Thrift::Exception
-  include ::Thrift::Struct, ::Thrift::Struct_Union
+    FIELDS = {
 
-  FIELDS = {
+    }
 
-  }
+    def struct_fields; FIELDS; end
 
-  def struct_fields; FIELDS; end
+    def validate
+    end
 
-  def validate
+    ::Thrift::Struct.generate_accessors self
   end
 
-  ::Thrift::Struct.generate_accessors self
 end
-

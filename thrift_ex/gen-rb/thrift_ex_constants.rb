@@ -7,3 +7,5 @@
 require "thrift"
 require "thrift_ex/gen-rb/thrift_ex_types"
 
+module Ex
+end

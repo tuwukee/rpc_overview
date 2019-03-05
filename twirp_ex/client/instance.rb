@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require "twirp_ex/twirp_ex_twirp"
+require "securerandom"
 
 module TwirpEx
   module Client

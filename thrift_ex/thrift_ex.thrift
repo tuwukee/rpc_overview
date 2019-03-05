@@ -1,3 +1,5 @@
+namespace rb ex
+
 struct HelloRequest {
   1: string content;
 }
@@ -7,7 +9,7 @@ struct HelloResponse {
 }
 
 struct Message {
-  1: i64 timestamps;
+  1: i64 timestamp;
   2: string content;
 }
 

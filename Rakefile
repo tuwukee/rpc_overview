@@ -7,6 +7,7 @@ require "grpc_ex/client/instance"
 require "twirp_ex/server/instance"
 require "twirp_ex/client/instance"
 require "thrift_ex/server/instance"
+require "thrift_ex/client/instance"
 
 desc "Start gRPC server"
 task :grpc_server do
@@ -47,6 +48,20 @@ end
 desc "Start Thrift server"
 task :thrift_server do
   puts("Start Thrift server")
+  puts ThriftEx::Server::Instance::DEFAULT_HOST
   server = ThriftEx::Server::Instance.new
   server.run
+end
+
+desc "Start Thrift client"
+task :thrift_client do
+  puts("Start Thrift client")
+  puts ThriftEx::Server::Instance::DEFAULT_HOST
+  client = ThriftEx::Client::Instance.new(ThriftEx::Server::Instance::DEFAULT_HOST)
+  client.open_transport
+  response = client.hello("heeey")
+  puts("Received: #{response.inspect}")
+  response = client.consume
+  puts("Received: #{response.inspect}")
+  client.close_transport
 end

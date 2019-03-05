@@ -7,12 +7,12 @@ module ThriftEx
     class Handler
       def hello(request)
         puts("Received: #{request.inspect}")
-        HelloResponse.new(content: "hello #{request.content}")
+        Ex::HelloResponse.new(content: "hello #{request.content}")
       end
 
       def consume(request)
         puts("Received: #{request.inspect}")
-        Message.new(timestamp: Time.now.to_i, content: "Yo")
+        Ex::Message.new(timestamp: Time.now.to_i, content: "Yo")
       end
     end
   end

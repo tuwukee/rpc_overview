@@ -1,21 +1,19 @@
 # frozen_string_literal: true
 
-require "rack"
-require "webrick"
 require "thrift_ex/server/handler"
 
 module ThriftEx
   module Server
     class Instance
-      attr_reader :server, :service, :handler
+      attr_reader :server, :handler
 
       DEFAULT_HOST = "127.0.0.1:2003"
       STOP_SIGNALS = %w[INT TERM].freeze
 
       def initialize(host = DEFAULT_HOST)
         addr, port = host.split(":")
-        handler = ThriftEx::Server::Handler.new
-        processor = ThriftEx::Processor.new(handler)
+        @handler = ThriftEx::Server::Handler.new
+        processor = Ex::ThriftEx::Processor.new(handler)
         transport = Thrift::ServerSocket.new(port)
         transportFactory = Thrift::BufferedTransportFactory.new
         @server = Thrift::SimpleServer.new(processor, transport, transportFactory)
