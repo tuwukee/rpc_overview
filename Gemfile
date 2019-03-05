@@ -5,6 +5,7 @@ source "https://rubygems.org"
 gem "grpc"
 gem "rake"
 gem "twirp"
+gem "thrift"
 gem "webrick"
 
 group :development do

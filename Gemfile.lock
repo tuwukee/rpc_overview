@@ -21,6 +21,7 @@ GEM
       byebug (~> 10.0)
       pry (~> 0.10)
     rake (12.3.2)
+    thrift (0.11.0.0)
     twirp (1.1.0)
       faraday (~> 0)
       google-protobuf (~> 3.0, >= 3.0.0)
@@ -34,6 +35,7 @@ DEPENDENCIES
   grpc-tools
   pry-byebug
   rake
+  thrift
   twirp
   webrick
 

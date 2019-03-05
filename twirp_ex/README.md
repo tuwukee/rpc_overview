@@ -8,7 +8,9 @@ https://github.com/twitchtv/twirp-ruby/wiki/Code-Generation
 
 2. Install `go` and run `go get github.com/twitchtv/twirp-ruby/protoc-gen-twirp_ruby`
 
-3. Create protobuff file describing request and response semantics
+3. Add gem `twirp` to Gemfile and run `bundle install`
+
+4. Create protobuff file describing request and response semantics
 
 ```proto
 
@@ -28,7 +30,7 @@ service TwirpEx {
 
 ```
 
-4. Generate the source code based on defined data structure
+5. Generate the source code based on defined data structure
 
 ```
 $ protoc --proto_path=./twirp_ex --ruby_out=./twirp_ex --twirp_ruby_out=./twirp_ex ./twirp_ex/twirp_ex.proto
