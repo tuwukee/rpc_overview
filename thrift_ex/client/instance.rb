@@ -4,14 +4,12 @@ require "thrift_ex/gen-rb/thrift_ex"
 require "securerandom"
 
 module ThriftEx
-  module Client # Client is reserved for a class name
+  module Client
     class Instance
       attr_reader :client, :transport, :client_id
 
       def initialize(host)
         addr, port = host.split(":")
-        puts addr
-        puts host
         @transport = Thrift::BufferedTransport.new(Thrift::Socket.new(addr, port))
         protocol = Thrift::BinaryProtocol.new(transport)
         @client = Ex::ThriftEx::Client.new(protocol)
