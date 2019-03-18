@@ -2,7 +2,7 @@
 # Source: grpc_ex.proto for package ''
 
 require "grpc"
-require "grpc_ex/grpc_ex_services_pb"
+require "grpc_ex/gen/grpc_ex_services_pb"
 
 module GrpcEx
   class Service

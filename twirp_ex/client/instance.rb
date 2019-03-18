@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require "twirp_ex/twirp_ex_twirp"
+require "twirp_ex/gen/twirp_ex_twirp"
 require "securerandom"
 
 module TwirpEx
