@@ -9,7 +9,7 @@ module GrpcEx
       attr_reader :stub, :client_id
 
       def initialize(host)
-        @stub = GrpcEx::Service.rpc_stub_class.new(host, :this_channel_is_insecure)
+        @stub = GrpcEx::Stub.new(host, :this_channel_is_insecure)
         @client_id = "gRPC-client-#{SecureRandom.hex}"
       end
 
